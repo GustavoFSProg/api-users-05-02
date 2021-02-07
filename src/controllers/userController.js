@@ -1,6 +1,7 @@
 import md5 from 'md5'
 import userModel from '../models/userModel'
 import { generateToken } from '../services/token'
+import send from '../services/email-service'
 
 async function getAll(req, res) {
   try {
@@ -15,8 +16,14 @@ async function getAll(req, res) {
 async function create(req, res) {
   try {
     const data = {
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password,
+    }
+
+    const email = {
+      name: req.body.name,
+      email: req.body.email,
     }
 
     await userModel.create({
@@ -25,6 +32,8 @@ async function create(req, res) {
       password: md5(req.body.password, process.env.GLOBAL_SALT_KEY),
     })
     const token = await generateToken(data)
+
+    send(email)
 
     return res.status(201).send({ msg: 'Deu Certo!!', Token: token })
   } catch (error) {

@@ -6,7 +6,13 @@ import routes from './routes'
 
 dotenv.config()
 
-mongoose.connect(process.env.DATABASE_KEY)
+mongoose.connect(process.env.DATABASE_KEY, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+})
+
 // eslint-disable-next-line new-cap
 const app = new express()
 
@@ -17,7 +23,7 @@ app.use(routes)
 const { PORT } = process.env
 
 app.listen(PORT, () => {
-  console.log(`Api on Port: ${PORT}`)
+  console.log(`Api on PORT: ${PORT} Bucetão Grande!`)
 })
 
 export default app
