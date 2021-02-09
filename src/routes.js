@@ -1,5 +1,8 @@
+/* eslint-disable import/extensions */
 import { Router } from 'express'
 import userController from './controllers/userController'
+// eslint-disable-next-line import/no-unresolved
+import productController from './controllers/productController'
 import Authorize from './services/auth'
 
 const routes = new Router()
@@ -9,5 +12,11 @@ routes.delete('/delete/:id', Authorize, userController.remover)
 routes.post('/user', Authorize, userController.create)
 routes.put('/update/:id', Authorize, userController.update)
 routes.post('/login', userController.Login)
+
+routes.get('/product', productController.getAll)
+routes.put('/product/update/:id', productController.update)
+routes.get('/by-title', productController.getByTitle)
+routes.post('/product/register', productController.register)
+routes.delete('/product/delete/:id', productController.deleteOne)
 
 export default routes
