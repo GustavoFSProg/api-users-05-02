@@ -2,10 +2,15 @@ import productModel from '../models/productModel'
 
 async function register(req, res) {
   try {
+    const { filename: image } = req.file
+
+    const [name] = image.split('.')
+    const filename = `${name}.jpg`
+
     await productModel.create({
       title: req.body.title,
       price: req.body.price,
-      // image: req.files.image,
+      image: filename,
     })
 
     return res.status(201).send({ msg: 'Deu certo!!' })

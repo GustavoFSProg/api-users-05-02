@@ -8,6 +8,9 @@ const schema = new Schema({
   price: {
     type: Number,
   },
+  image: {
+    type: String,
+  },
 })
 
 export default model('productModel', schema)

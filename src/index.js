@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import path from 'path'
 import routes from './routes'
 
 dotenv.config()
@@ -22,8 +23,10 @@ app.use(routes)
 
 const { PORT } = process.env
 
+app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')))
+
 app.listen(PORT, () => {
-  console.log(`Api on PORT: ${PORT} Bucetão Grande!`)
+  console.log(`Api on PORT: ${PORT} Server: 1.0!`)
 })
 
 export default app

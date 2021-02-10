@@ -1,9 +1,13 @@
 /* eslint-disable import/extensions */
 import { Router } from 'express'
+import multer from 'multer'
 import userController from './controllers/userController'
 // eslint-disable-next-line import/no-unresolved
 import productController from './controllers/productController'
 import Authorize from './services/auth'
+import uploadConfig from './config/uploadConfig'
+
+const upload = multer(uploadConfig)
 
 const routes = new Router()
 
@@ -16,7 +20,11 @@ routes.post('/login', userController.Login)
 routes.get('/product', productController.getAll)
 routes.put('/product/update/:id', productController.update)
 routes.get('/by-title', productController.getByTitle)
-routes.post('/product/register', productController.register)
+routes.post(
+  '/product/register',
+  upload.single('image'),
+  productController.register
+)
 routes.delete('/product/delete/:id', productController.deleteOne)
 
 export default routes
