@@ -20,6 +20,7 @@ routes.post('/login', userController.Login)
 routes.get('/product', productController.getAll)
 routes.put('/product/update/:id', productController.update)
 routes.get('/by-title', productController.getByTitle)
+routes.get('/product/:id', productController.getById)
 routes.post(
   '/product/register',
   upload.single('image'),

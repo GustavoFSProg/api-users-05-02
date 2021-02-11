@@ -39,6 +39,16 @@ async function getByTitle(req, res) {
   }
 }
 
+async function getById(req, res) {
+  try {
+    const data = await productModel.findById(req.params.id)
+
+    return res.status(200).send(data)
+  } catch (error) {
+    return res.status(400).send({ msg: 'Deu erro, tudo cagado!!' })
+  }
+}
+
 async function update(req, res) {
   try {
     await productModel.findByIdAndUpdate(req.params.id, {
@@ -64,4 +74,4 @@ async function deleteOne(req, res) {
   }
 }
 
-export default { register, getAll, deleteOne, getByTitle, update }
+export default { register, getById, getAll, deleteOne, getByTitle, update }
