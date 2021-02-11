@@ -18,12 +18,13 @@ routes.put('/update/:id', Authorize, userController.update)
 routes.post('/login', userController.Login)
 
 routes.get('/product', productController.getAll)
-routes.put('/product/update/:id', productController.update)
+routes.put('/product/update/:id', Authorize, productController.update)
 routes.get('/by-title', productController.getByTitle)
 routes.get('/product/:id', productController.getById)
 routes.post(
   '/product/register',
   upload.single('image'),
+  Authorize,
   productController.register
 )
 routes.delete('/product/delete/:id', productController.deleteOne)
