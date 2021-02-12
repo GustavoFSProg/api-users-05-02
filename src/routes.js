@@ -27,6 +27,6 @@ routes.post(
   Authorize,
   productController.register
 )
-routes.delete('/product/delete/:id', productController.deleteOne)
+routes.delete('/product/delete/:id', Authorize, productController.deleteOne)
 
 export default routes
