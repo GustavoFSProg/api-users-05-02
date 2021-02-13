@@ -77,9 +77,11 @@ async function Login(req, res) {
     })
 
     if (!data) {
-      return res
-        .status(201)
+      const retorno = res
+        .status(400)
         .send({ Erro: 'Email or Password are incorrect!!!' })
+
+      return res.status(400).send(retorno)
     }
     const token = await generateToken(data)
     return res.status(201).send({ data, token })
