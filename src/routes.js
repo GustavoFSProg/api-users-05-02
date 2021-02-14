@@ -12,6 +12,7 @@ const upload = multer(uploadConfig)
 const routes = new Router()
 
 routes.get('/', userController.getAll)
+routes.get('/userOne/:id', userController.getOne)
 routes.delete('/delete/:id', Authorize, userController.remover)
 routes.post('/user', Authorize, userController.create)
 routes.put('/update/:id', Authorize, userController.update)

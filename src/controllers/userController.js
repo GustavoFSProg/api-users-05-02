@@ -13,6 +13,15 @@ async function getAll(req, res) {
   }
 }
 
+async function getOne(req, res) {
+  try {
+    const data = await userModel.findById(req.params.id)
+    return res.status(201).send(data)
+  } catch (error) {
+    return res.status(400).send('Erro tudo cagado!!!')
+  }
+}
+
 async function create(req, res) {
   try {
     const data = {
@@ -90,4 +99,4 @@ async function Login(req, res) {
   }
 }
 
-export default { getAll, remover, create, update, Login }
+export default { getAll, getOne, remover, create, update, Login }
